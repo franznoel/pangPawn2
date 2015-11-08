@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10">
+    <div class="well well-sm">
+      <h2>Create Invoice</h2>
+      <form method="post" action="/transactions.html">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="customer">Customer</label>
+              <select name="customer" class="form-control">
+                <option value="">-- Select Customer --</option>
+                <option value="0001">Tanglao, Franz Noel</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="lastname">Customer Info</label>
+              <textarea name="info-customer" class="form-control" placeholder="Customer information will pull up once selected." disabled="disabled" rows="4"></textarea>
+            </div>
+          </div>
+
+          <div class="col-md-offset-4 col-md-4">
+            <div class="form-group">
+              <label>Invoice Date</label>
+              <input type="date" name="dateCreated" value="" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Invoice Number</label>
+              <input type="text" name="loanNumber" value="" class="form-control" placeholder="L123456789" />
+            </div>
+          </div>
+        </div>
+
+        <!-- product list -->
+        <div class="row">
+          <div class="col-md-12">
+            <table id="invoice-table" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Item No.</th>
+                  <th>Description</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Total</th>
+                  <th>Tax</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <div class="btn-toolbar">
+            <input type="submit" class="btn btn-primary" value="Save Invoice" />
+            <a href="/transactions" class="btn btn-default">Transactions List</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+
+
+

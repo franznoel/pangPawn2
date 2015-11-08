@@ -1,0 +1,81 @@
+{% extends 'signup-base.html' %}
+
+{% block content %}
+  <div class="col-md-10">
+    <div class="well well-sm">
+      <h2>Add Company</h2>
+      <form method="post" action="/companies?view=add">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="firstname">Company Name</label>
+              <input type="text" name="companyName" value="" class="form-control" placeholder="Company Name"/>
+            </div>
+            <div class="form-group">
+              <label for="namespace">Namespace</label>
+              <input type="text" name="namespace" value="" class="form-control" placeholder="Namespace"/>
+            </div>
+          </div>
+          <!-- Contact -->
+          <!--
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="contact">Contact</label>
+              <input type="text" name="contact" class="form-control" value="" placeholder="Contact Name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" name="address2" class="form-control" value="" placeholder="Email" />
+            </div>
+            <div class="form-group">
+              <label for="email">Phone</label>
+              <input type="text" name="phone" class="form-control" value="" placeholder="Phone" />
+            </div>
+          </div>
+          -->
+          <!-- Address -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="address1">Address 1</label>
+              <input type="text" name="address1" class="form-control" value="" placeholder="Address 1" />
+            </div>
+            <div class="form-group">
+              <label for="address2">Address 2</label>
+              <input type="text" name="address2" class="form-control" value="" placeholder="Address 2" />
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" name="city" class="form-control" placeholder="City" />
+            </div>
+            <div class="row">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label>State</label>
+                  <input type="text" name="state" class="form-control" placeholder="State" />
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label>Zip</label>
+                  <input type="text" name="zipCode" class="form-control" placeholder="Zip" />
+                </div>
+              </div>          
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-toolbar">
+                    <input type="submit" class="btn btn-primary" value="Save Company" />
+                    <a href="/companies" class="btn btn-default">Company List</a>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Button -->
+
+      </form>
+    </div>
+  </div>
+{% endblock content %}

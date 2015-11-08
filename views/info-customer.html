@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="col-md-10">
+    <div class="well well-md">
+        <h2>Customer Info</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="firstname">Name</label>
+                    <p>{{customer.lastname}}, {{customer.firstname}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Birthdate</label>
+                    <p>{{customer.birthdate}}</p>
+                </div>
+                <label for="status">Address</label>
+                <address>
+                    {{customer.address.address1}},<br/>
+                    {{customer.address.address2}}<br/>
+                    {{customer.address.city}}, {{customer.address.state}} {{customer.address.zip}}<br/>
+                    </address>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>License</label>
+                    <p>{{customer.license}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Gun License</label>
+                    <p>{{customer.gunLicense}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <p>{{customer.phone}}</p>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <p>{{customer.email}}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <p>Active</p>
+                </div>
+            </div>
+        </div>
+        <!-- Button -->
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <a href="#delete-customer" class="btn btn-danger" data-toggle="modal" data-target="#delete-customer">Delete</a>
+                <a href="/customers?view=edit&customer={{customer.key.urlsafe()}}" class="btn btn-primary">Edit</a>
+            </div>
+            <a href="/customers" class="btn btn-default">Customers List</a>
+        </div>
+    </div><!-- .well .well-sm-->
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul id="transactions-list" class="nav nav-tabs">
+          <li class="active"><a href="#loans">Loans</a></li>
+          <li><a href="#redeems">Redeems</a></li>
+          <li><a href="#sold">Sold</a></li>
+          <li><a href="#bought">Bought</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="loans" class="tab-pane active">
+            <h3>Loans</h3>
+            <table id="loans-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>L1230412</td>
+                  <td>Necklace:2K 14 inches Gold</td>
+                  <td>July 8, 2012</td>
+                  <td>Pawned</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="redeems" class="tab-pane">
+            <h3>Redeems</h3>
+            <table id="redeems-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>L1230412</td>
+                  <td>Necklace:2K 14 inches Gold</td>
+                  <td>July 8, 2012</td>
+                  <td>Pawned</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="sold" class="tab-pane">
+            <h3>Sold</h3>
+            <table id="sold-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>L1230412</td>
+                  <td>Necklace:2K 14 inches Gold</td>
+                  <td>July 8, 2012</td>
+                  <td>Pawned</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="bought" class="tab-pane">
+            <h3>Bought</h3>
+            <table id="bought-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>L1230412</td>
+                  <td>Necklace:2K 14 inches Gold</td>
+                  <td>July 8, 2012</td>
+                  <td>Pawned</td>
+                </tr>
+              </tbody>
+            </table>                  
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-customer" class="modal fade">
+    <div class="modal-dialog">  
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete Customer</h4>
+        </div>
+        <div class="modal-body">
+          <h3></h3>
+          <p>Are you sure you want to delete this customer?</p>
+        </div>
+        <div class="modal-footer">
+          <div type="button" class="btn btn-default" data-dismiss="modal">Close</div>
+          <a href="/customers/delete/{{customer.key.urlsafe()}}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+{% endblock content %}
+

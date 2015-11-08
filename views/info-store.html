@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10">
+    <div class="well well-md">
+      <h2>Store Info</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="storeId">Store ID</label>
+              <p>{{store.key.id()}}</p>
+            </div>
+            <div class="form-group">
+              <label for="storeName">Store Name</label>
+              <p>{{store.storeName}}</p>
+            </div>
+            <label for="status">Store Address</label>
+            <address>
+              {{store.address.address1}},<br/>
+              {{store.address.address2}}<br/>
+              {{store.address.city}}, {{store.address.state}} {{store.address.zipCode}}<br/>
+            </address>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="status">Status</label>
+              <p class="form-control-static">Active</p>
+            </div>
+          </div>
+        </div>
+        <!-- Button -->
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a href="/stores?view=edit&store={{store.key.urlsafe()}}" class="btn btn-primary">Edit</a>
+            <a href="#delete-store" class="btn btn-danger" data-toggle="modal">Delete</a>
+          </div>
+          <a href="/stores" class="btn btn-default">Store List</a>
+        </div>
+    </div><!-- .well .well-sm-->
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul id="store-list" class="nav nav-tabs">
+          <li class="active"><a href="#users">Users</a></li>
+          <li><a href="#transactions">Transactions</a></li>
+          <li><a href="#items">Items</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="users" class="tab-pane active">
+            <h3>Users</h3>
+            <table id="users-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Date Started</th>
+                  <th>Last Activity</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>Tanglao, Franz Noel</td>
+                  <td>franz@asteriainteractive.com</td>
+                  <td>Jan 25, 2014</td>
+                  <td>Jan 25, 2015</td>
+                  <td>Active</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- #transactions -->
+          <div id="transactions" class="tab-pane">
+            <h3>Transactions</h3>
+            <table id="transactions-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>Name</th>
+                  <th>Birthdate</th>
+                  <th>Date Started</th>
+                  <th>Last Transaction</th>
+                  <th>No. Of Transactions</th>
+               </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>Reyes, Priscila</td>
+                  <td>July 8, 1970</td>
+                  <td>July 8, 2010</td>
+                  <td>August 5, 2014</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- #items -->
+          <div id="items" class="tab-pane">
+            <h3>Items</h3>
+            <table id="items-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>Name</th>
+                  <th>Birthdate</th>
+                  <th>Date Started</th>
+                  <th>Last Transaction</th>
+                  <th>No. Of Transactions</th>
+               </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>Reyes, Priscila</td>
+                  <td>July 8, 1970</td>
+                  <td>July 8, 2010</td>
+                  <td>August 5, 2014</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- #items -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- delete-store modal -->
+  <div id="delete-store" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete Store</h4>
+        </div>
+        <div class="modal-body">
+          <h3></h3>
+          <p>Are you sure you want to delete this store?</p>
+        </div>
+        <div class="modal-footer">
+          <div type="button" class="btn btn-default" data-dismiss="modal">Close</div>
+          <a href="/stores/delete/{{store.key.urlsafe()}}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+{% endblock content %}

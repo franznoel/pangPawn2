@@ -1,0 +1,34 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-offset-3 col-md-6">
+		<h1>Register a new user</h1>
+		<form action="/signup" method="POST">
+			<input type="hidden" name="namespaceKey" value="{{company.urlsafe()}}">
+			<div class="form-group">
+				<label for="username">Username</label>
+				<input type="text" class="form-control" name="username" />
+			</div>
+			<div class="form-group">
+				<label for="email">Email address</label>
+				<input type="text" class="form-control" name="email" />
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" name="password" />
+			</div>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" name="name" />
+			</div>
+			<div class="form-group">
+				<label for="lastname">Last Name</label>
+				<input type="text" class="form-control" name="lastname" />
+			</div>
+			<div class="form-group">
+			<input type="submit" class="btn btn-primary" value="Create user" />
+		</form>	
+	</div>
+</div>
+{% endblock %}

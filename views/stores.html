@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10">
+    <h2>Stores</h2>
+    <div class="btn-toolbar">
+        <a href="/stores?view=add" class="btn btn-primary">Add Stores</a>
+        <a href="#stores-csv-upload" class="btn btn-success" data-toggle="modal" data-target="#stores-csv-upload">Upload Stores</a>
+    </div>
+    <table id="stores-table" class="table table-hover table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="checkall" /></th>
+          <th>StoreName</th>
+          <th>Address</th>
+          <th>Opening Date</th>
+          <th>No. Of Users</th>
+       </tr>
+      </thead>
+      <tbody>
+        {% for store in stores %}
+          <tr class="listLink" data-key="{{store.key.urlsafe()}}">
+            <td><input type="checkbox" name="id" value="{{store.key.id()}}" /></td>
+            <td>{{store.storeName}}</td>
+            <td>{{ store.address.address1}} {{store.address.address2}}, {{store.address.city}}, {{store.address.state}} {{store.address.zipCode}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="stores-csv-upload" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form method="post" action="" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h4 class="modal-title">Upload Stores from CSV</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="csvStores">Stores CSV</label>
+              <input type="file" class="form-control" name="csvStores" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#close" class="btn btn-default" data-dismiss="modal">Close</a>
+            <a href="" class="btn btn-primary">Upload</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  </script>
+{% endblock content %}
+

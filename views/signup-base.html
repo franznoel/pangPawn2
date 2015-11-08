@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8"/>
+    <title>Pawnsoftware</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/handsontable/handsontable.full.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-datatables/datatables.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" ></style>
+    <script type="text/javascript" src="/js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="/handsontable/handsontable.full.min.js"></script>
+    <style type="text/css">
+      .btn-toolbar {padding:10px 0 10px 0;}
+    </style>
+    {% endblock head %}
+
+  </head>
+
+  <body>
+
+    <nav id="menu" class="navbar navbar-default">
+      {% block menu %}
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/dashboard">Pawnsoftware</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{logout_url}}">{{user}}</a></li>
+          </ul>
+        </div><!-- /.container-fluid -->
+      {% endblock menu %}
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        {% block navigation %}
+          <div class="col-md-2">
+            <!-- Navigation -->
+            <div class="list-group">
+              {% if admin_user %}
+                <a href="{{host_url}}/dashboard" class="list-group-item{{ ' active' if url.path == '/dashboard' else '' }}">Dashboard</a>
+                <a href="{{host_url}}/companies" class="list-group-item{{ ' active' if url.path == '/companies' else '' }}">Companies</a>
+                <a href="{{host_url}}/stores" class="list-group-item{{ ' active' if url.path == '/stores' else '' }}">Stores</a>
+                <a href="{{host_url}}/users" class="list-group-item{{ ' active' if url.path == '/users' else '' }}">Users</a>
+                <a href="{{host_url}}/customers" class="list-group-item{{ ' active' if url.path == '/customers' else '' }}">Customers</a>
+                <a href="{{host_url}}/transactions" class="list-group-item{{ ' active' if url.path == '/transactions' else '' }}">Transactions</a>
+                <a href="{{host_url}}/items" class="list-group-item{{ ' active' if url.path == '/items' else '' }}">Items</a>
+                <a href="{{host_url}}/item-categories" class="list-group-item{{ ' active' if url.path == '/item-categories' else '' }}">Item Categories</a>
+                <a href="{{host_url}}/reports" class="list-group-item{{ ' active' if url.path == '/reports' else '' }}">Reports</a>
+                <a href="{{host_url}}/settings" class="list-group-item{{ ' active' if url.path == '/settings' else '' }}">Settings</a>
+              {% else %}
+                <a href="{{host_url}}/" class="list-group-item{{ ' active' if url.path == '/' else '' }}">Dashboard</a>
+                <a href="{{host_url}}/stores" class="list-group-item{{ ' active' if url.path == '/stores' else '' }}">Stores</a>
+                <a href="{{host_url}}/users" class="list-group-item{{ ' active' if url.path == '/users' else '' }}">Users</a>
+                <a href="{{host_url}}/customers" class="list-group-item{{ ' active' if url.path == '/customers' else '' }}">Customers</a>
+                <a href="{{host_url}}/transactions" class="list-group-item{{ ' active' if url.path == '/transactions' else '' }}">Transactions</a>
+                <a href="{{host_url}}/items" class="list-group-item{{ ' active' if url.path == '/items' else '' }}">Items</a>
+                <a href="{{host_url}}/item-categories" class="list-group-item{{ ' active' if url.path == '/item-categories' else '' }}">Item Categories</a>
+                <a href="{{host_url}}/reports" class="list-group-item{{ ' active' if url.path == '/reports' else '' }}">Reports</a>
+                <a href="{{host_url}}/settings" class="list-group-item{{ ' active' if url.path == '/settings' else '' }}">Settings</a>
+              {% endif %}
+            </div>
+            <!-- Navigation -->
+          </div>
+        {% endblock navigation %}
+
+
+        {% block content %}{% endblock content %}
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-datatables/datatables.min.js" ></script>
+    <script type="text/javascript" src="/bootstrap-datatables/datatables-bootstrap.js" ></script>
+    <script type="text/javascript">
+      function redirect_company(companyKey) { 
+        if (companyKey==undefined) {
+          var message = get_message(companyKey);
+          $('#error-message').html().show()
+        } else {
+          window.location = "/companies?view=info&company=" + companyKey; 
+        }
+      }
+      function redirect_store(storeKey) { window.location = "/stores?view=info&store=" + storeKey; }
+      function redirect_user(userKey) { window.location = "/users?view=info&user=" + userKey; }
+      function redirect_customer(customerKey) { window.location = "/customers?view=info&customer=" + customerKey; }
+
+      $(document).ready(function() {
+        $('#company-table').dataTable({"language": {"emptyTable": "There are no companies."}});
+        $('#users-table').dataTable({"language": {"emptyTable": "There are no users."}});
+        $('#stores-table').dataTable({"language": {"emptyTable": "There are no stores listed."}});
+        $('#customers-table').dataTable({"language": {"emptyTable": "There are no customers listed."}});
+        $('#transactions-table').dataTable({"language": {"emptyTable": "There are no transactions."}});
+        $('#items-table').dataTable({"language": {"emptyTable": "There are no items."}});
+        $('#categories-table').dataTable({"language": {"emptyTable": "There are no categories."}});
+ 
+        // Transactions
+        $('#loans-table').dataTable({"language": {"emptyTable": "There are no loans."}});
+        $('#redeems-table').dataTable({"language": {"emptyTable": "There are no redeems."}});
+        $('#sold-table').dataTable({"language": {"emptyTable": "There are no sold items."}});
+        $('#bought-table').dataTable({"language": {"emptyTable": "There are no sales."}});
+        $('#accounts').dataTable({"language": {"emptyTable": "There are no accounts."}});
+
+        // Entity Tables
+        $("table#company-table > tbody > tr").click(function() { redirect_company($(this).data('key')); });
+        $("table#stores-table > tbody > tr").click(function() { redirect_store($(this).data('key')); });
+        $("table#users-table > tbody > tr").click(function() { redirect_user($(this).data('key')); });
+        $("table#customers-table > tbody > tr").click(function() { redirect_customer($(this).data('key')); });
+      });
+
+      $('#company-list a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#store-list a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#transactions-list a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#reports a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#settings a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      
+      // On click dataTable 
+      $('#transactions-table > tbody > tr').click(function() { window.location = "/loans?view=create"; });
+      $("table#customers-table > tbody > tr").click(function() { window.location = "/customers?view=info"; });
+
+      function getAllPanel() {
+        return $(".col-md-10");
+      } 
+    </script>
+  </body>
+
+</html>

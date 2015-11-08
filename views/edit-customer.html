@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10">
+    <div class="well well-sm">
+      <h2>Edit Customer</h2>
+      <form method="post" action="/customers?view=edit&customer={{customer.key.urlsafe()}}">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="firstname">First Name</label>
+              <input type="text" name="firstname" value="{{customer.firstname}}" class="form-control" placeholder="First Name"/>
+            </div>
+            <div class="form-group">
+              <label for="lastname">Last Name</label>
+              <input type="text" name="lastname" value="{{customer.lastname}}" class="form-control" placeholder="Last Name"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <!-- Address -->
+            <div class="form-group">
+              <label for="address1">Address 1</label>
+              <input type="text" name="address1" class="form-control" value="{{customer.address.address1}}" placeholder="Address 1" />
+            </div>
+            <div class="form-group">
+              <label for="address2">Address 2</label>
+              <input type="text" name="address2" class="form-control" value="{{customer.address.address2}}" placeholder="Address 2" />
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" name="city" class="form-control" value="{{customer.address.city}}" placeholder="City" />
+            </div>
+            <div class="row">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label for="state">State</label>
+                  <input type="text" name="state" class="form-control" value="{{customer.address.state}}" placeholder="State" />
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="zipCode">Zip</label>
+                  <input type="text" name="zipCode" class="form-control" value="{{customer.address.zipCode}}" placeholder="Zip" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="license">License</label>
+                <input type="text" name="license" class="form-control" placeholder="Driver's License" value="{{customer.license}}" />
+              </div>
+              <div class="form-group">
+                <label for="gunLicense">Gun License</label>
+                <input type="text" name="gunLicense" class="form-control" placeholder="Gun License" value="{{customer.gunLicense}}" />
+              </div>
+              <div class="form-group">
+                <label for="birthdate">Birthdate</label>
+                <input type="date" name="birthdate" class="form-control" placeholder="01/01/1999" value="{{customer.birthdate|dateNumberFormat}}" />
+              </div>
+              <div class="form-group">
+                <label for="status">Status</label>
+                <label class="radio-inline">
+                  <input type="radio" name="status" class="input" value="active" checked="checked" /> Active
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="status" class="input" value="inactive" /> InActive
+                </label>
+              </div>                    
+            </div>
+          </div>
+        </div>
+        <!-- Button -->
+        <div class="btn-toolbar">
+            <input type="submit" class="btn btn-primary" value="Update" />
+            <a href="/customers?view=info&customer={{customer.key.urlsafe()}}" class="btn btn-default">Cancel</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+

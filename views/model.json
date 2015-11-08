@@ -1,0 +1,38 @@
+{ 
+	"companies": [ {
+		"companyName": [],
+		"paymentMethod": [],
+	} ],
+	"stores": [ {
+		"-JxWfNR7fJ5syxL70cqu": {
+			"storeName": "",
+			"location": "",
+			"address": "",
+			"users": ["auth","list","here"],
+		},
+	} ],
+	"users": [ {
+		"auth": "",
+	} ],
+	"customers": [
+		"-JxWfNR7fJ5syxL70cqu" {
+			"nickname": "Franz",
+			"firstname": "Franz Noel",
+			"lastname": "Tanglao",
+			"fullname": "Franz Noel Tanglao",
+			"address": [],
+			"phone": [],
+			"email": [], 
+			"birthdate": "",
+			"status": "",
+			"license": [],
+			"gunLicense": [],
+			"dateCreated": "",
+			"dateUpdated": "",
+		},
+	],
+	"transactions": [],
+	"items": [],
+	"itemCategories": [],
+}
+

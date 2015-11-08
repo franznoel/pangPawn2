@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="col-md-10">
+		<h2>Reports</h2>
+    <ul id="reports" class="nav nav-tabs" role="tablist">
+      <li class="active"><a href="#accounting-reports">Accounting</a></li>
+      <li><a href="#notices-reports">Notices</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- #accounting-reports -->
+      <div role="tabpanel" class="tab-pane active" id="accounting-reports">
+        <div class="btn-toolbar pull-right">
+          <div class="btn-group">
+            <a href="#print-notices" class="btn btn-primary">Print Account Info</a>
+          </div>
+        </div>
+        <h3>Accounting</h3>
+      </div>
+      <!-- #accounting-reports -->
+      <!-- #notices-reports -->
+      <div role="tabpanel" class="tab-pane" id="notices-reports">
+        <div class="btn-toolbar pull-right">
+          <div class="btn-group">
+            <a href="#print-notices" class="btn btn-primary">Print Notices</a>
+          </div>
+        </div>
+        <h3>Notices</h3>
+      </div>
+      <!-- #notices-reports -->
+    </div>
+  </div>
+{% endblock content %}
+

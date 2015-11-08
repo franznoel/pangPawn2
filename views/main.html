@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8"/>
+    <title>Pawnsoftware</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/handsontable/handsontable.full.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-datatables/datatables.css" ></style>
+    <script type="text/javascript" src="/js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="/handsontable/handsontable.full.min.js"></script>
+    <style type="text/css">
+      .btn-toolbar {padding:10px 0 10px 0;}
+    </style>
+    {% endblock head %}
+
+  </head>
+
+  <body>
+
+    <nav id="menu" class="navbar navbar-default navbar-static-top">
+      {% block menu %}
+      <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">PangPawn</a>
+          </div>
+      </div><!-- /.container-fluid -->
+      {% endblock menu %}
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        {% block content %}
+        {% endblock content %}
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-datatables/datatables.min.js" ></script>
+    <script type="text/javascript" src="/bootstrap-datatables/datatables-bootstrap.js" ></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#gcusers').dataTable();
+        $('#gcapplications').dataTable();
+        $('#users-table').dataTable();
+        $('#stores-table').dataTable();
+        $('#customers-table').dataTable();
+
+        // Transactions 
+        $('#loans-table').dataTable();
+        $('#redeems-table').dataTable();
+        $('#sold-table').dataTable();
+        $('#bought-table').dataTable();
+
+        $("table#customers-table > tbody > tr").click(function() { window.location = "/info-customer.html"; });
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+
+      $('#company-list a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#transactions-list a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#login-signup-form a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+
+    </script>
+  </body>
+
+</html>

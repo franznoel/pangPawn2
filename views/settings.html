@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="col-md-10">
+		<h2>Settings</h2>
+    <ul id="settings" class="nav nav-tabs" role="tablist">
+      <li class="active"><a href="#transactions-setting">Transactions</a></li>
+      <li><a href="#fees-setting">Fees</a></li>
+      <li><a href="#taxes-setting">Taxes</a></li>
+    </ul>
+
+    {{demo}}
+    <div class="tab-content">
+      <!-- #transactions-setting -->
+      <div role="tabpanel" class="tab-pane active" id="transactions-setting">
+            <h3>Transactions</h3>
+
+            <form method="post" action="?view=edit">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% for setting in settings %}
+                        <div class="form-group">
+                            <label for="{{setting.name}}">{{setting.label}}</label>
+                            <input type="text" name="{{setting.name}}" class="form-control" value="{{setting.value}}" placeholder="Loan Number"/>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                      <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </div>
+            </form>
+      </div>
+      <!-- #fees-setting -->
+      <div role="tabpanel" class="tab-pane" id="fees-setting">
+        <h3>Fees</h3>
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a href="#upload-fees" class="btn btn-primary">Upload Fees</a>
+          </div>
+        </div>
+      </div>
+      <!-- #taxes-setting -->
+      <div role="tabpanel" class="tab-pane" id="taxes-setting">
+        <h3>Taxes</h3>
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a href="#taxes" class="btn btn-primary">Set Tax</a>
+          </div>
+        </div>
+      </div>
+      <!-- #taxes-setting -->
+
+		</div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,10 @@
+TODO: 
+
+Create Loan Page
+# Add a settings field for principalFee, setupFee, insuranceFee,
+
+
+Info Loan Page
+# Create an Info Loan page.
+
+

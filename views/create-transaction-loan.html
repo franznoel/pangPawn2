@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10 col-sm-10">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Create Loan</h2>
+        <form method="post" action="/transactions/loans?view=create">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Loan Number</label>
+                <input type="text" name="loanNumber" value="L123456789" class="form-control" placeholder="L123456789" />
+              </div>
+              <div class="form-group">
+                <label for="customer">Customer Info</label>
+                <div class="btn-toolbar">
+                  <a href="#select-customer" class="btn btn-default btn-sm" data-toggle="modal" data-target="#select-customer">Search customer</a>
+                  <input id="customerKey" type="hidden" name="customerKey" value="" />  
+                </div>
+                <textarea id="info-customer" class="form-control" placeholder="Customer information will pull up once selected." rows="6">{{customer}}</textarea>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Other Information</h4>
+                </div>
+                <table class="table table-bordered">
+                    <tr>
+                      <th>Extended</th>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <th>Status</th>
+                      <td>Processing Loan</td>
+                    </tr>
+                </table>
+              </div><!-- .panel -->
+            </div>
+
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Loan Information</h4>
+                </div>
+                <table class="table table-bordered">
+                    <tr>
+                      <th>Original</th>
+                      <td>08/02/2014</td>
+                      <td>L123456</td>
+                    </tr>
+                    <tr>
+                      <th>Previous</th>
+                      <td>08/02/2014</td>
+                      <td>L123456</td>
+                    </tr>
+                    <tr>
+                      <th>Next</th>
+                      <td>01/02/2015</td>
+                      <td>L123458</td>
+                    </tr>
+                </table>
+              </div><!-- .panel -->
+              <div class="panel panel-default">
+                <div class="panel-heading"><h4 class="panel-title">Location</h4></div>
+                <table class="table table-bordered table-condensed">
+                  <tr>
+                    <th>In Premises</th>
+                    <td>
+                      <select name="inPremises" class="form-control input-sm">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Item Location</th>
+                    <td><input type="text" name="location" class="form-control input-sm" value="TV Area (C2)" /></td>
+                  </tr>
+                </table>
+              </div><!-- .panel -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-7">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" class="form-control">
+                  <option value="Electronics">Electronics</option>
+                  <option value="Jewelry">Jewelry</option>
+                  <option value="Musical Instrument">Musical Instrument</option>
+                  <option value="Gun">Gun</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <!-- Categories -->
+              <div id="category-electronics" class="category-container">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="brandName">Brand</label>
+                      <input type="text" name="brandName" class="form-control" value="" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="modelNumber">Model Number</label>
+                      <input type="text" name="modelNumber" class="form-control" value="" placeholder="" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="serialNumber">Serial Number</label>
+                      <input type="text" name="serialNumber" class="form-control" value="" placeholder="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="category-jewelry" class="category-container">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="karat">Karat</label>
+                      <input type="text" name="karat" class="form-control" value="" placeholder="k" />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="deadWeight">Dead Weight</label>
+                      <input type="text" name="deadWeight" class="form-control" value="" placeholder="dw" />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="grams">Grams</label>
+                      <input type="text" name="grams" class="form-control" value="" placeholder="gms" />
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="ounces">Ounces</label>
+                      <input type="text" name="ounces" class="form-control" value="" placeholder="oz" />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="counts">Counts</label>
+                      <input type="text" name="counts" class="form-control" value="" placeholder="cts" />
+                    </div>
+                  </div>                                
+                </div>
+              </div>
+              <div id="category-musical" class="category-container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="instrumentBrand">Brand</label>
+                      <input type="text" name="instrumentBrand" class="form-control" value="" placeholder="Brand">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="instrumentKind">Instrument Kind</label>
+                      <select name="instrumentKind" class="form-control">
+                        <option>Guitar</option>
+                        <option>Bass</option>
+                        <option>Drums</option>
+                        <option>Recording</option>
+                        <option>Software</option>
+                        <option>Keyboard</option>
+                        <option>Music Software</option>
+                        <option>Live Sound</option>
+                        <option>DJ Equipment</option>
+                        <option>Lighting</option>
+                        <option>Band Instrument</option>
+                        <option>Other Muscial Instrument</option>
+                      </select>
+                    </div>
+                  </div>                                
+                </div>
+              </div>      
+              <div id="category-gun" class="category-container">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="gunCaliber">Gun Caliber</label>
+                      <input type="text" name="gunCaliber" class="form-control" value="" placeholder="Caliber">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="gunType">Gun Type</label>
+                      <input type="text" name="gunType" class="form-control" value="" placeholder="Type">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="gunAction">Gun Action</label>
+                      <input type="text" name="gunAction" class="form-control" value="" placeholder="Action">
+                    </div>
+                  </div>
+                </div>
+              </div>      
+              <!-- End Categories -->
+              <div class="form-group">
+                <label>Item Description</label>
+                <textarea name="description" class="form-control" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-horizontal">
+                <div class="form-group">
+                  <label for="principalAmount" class="col-md-5 control-label">Principal Fee</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="principalAmount" type="text" name="principalAmount" class="form-control" value="10.00" placeholder="0.00" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="setupFee" class="col-md-5 control-label">Setup Fee</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="setupFee" type="text" name="setupFee" class="form-control" value="10.00" placeholder="0.00" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="insuranceFee" class="col-md-5 control-label">Fire/Misc Fee</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="insuranceFee" type="text" name="insuranceFee" class="form-control" value="15.00" placeholder="0.00" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="total" class="col-md-5 control-label">Total</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="total" type="text" name="total" class="form-control" value="" placeholder="0.00" />
+                    </div>
+                  </div>
+                </div>
+              </div><!-- .form-horizontal -->
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="btn-toolbar">
+            <a href="/transactions" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Transactions List</a>
+            <input type="submit" class="btn btn-primary" value="Save Loan" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="select-customer" class="modal fade" role="customer-selector">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4>Select Customer</h4>
+        </div>
+        <div class="modal-body">
+          <table id="searchCustomers-table" class="table table-bordered">
+            <thead>
+              <tr>
+                <td>Customer Name</td>
+                <td>License</td>
+                <td>Birthdate</td>
+                <td>Address</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for customer in customers %}
+              <tr class="listLink" data-key="{{customer.key.urlsafe()}}">
+                <td>{{customer.lastname}}, {{customer.firstname}}</td>
+                <td>{{customer.license}}</td>
+                <td>{{customer.birthdate}}</td>
+                <td>{{customer.address.address1}}, {{customer.address.address2}}, {{customer.address.city}}, {{customer.address.state}}, {{customer.address.zipCode}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var principalAmount = parseFloat($("#principalAmount").val());
+    var setupFee = parseFloat($("#setupFee").val());
+    var insuranceFee = parseFloat($("#insuranceFee").val());
+    var totalAmount = parseFloat(principalAmount + setupFee + insuranceFee);
+
+    $(document).ready(function() {
+      $(".category-container").hide(); $("#category-electronics").show();
+      $("#total").val(totalAmount.toFixed(2));3
+    });
+
+    $("#category").change(function() {
+      var category  = $(this).val();
+      console.log(category);
+      if (category=='Electronics') { $(".category-container").slideUp(); $("#category-electronics").slideDown();} 
+      else if (category=='Jewelry') { $(".category-container").slideUp();$("#category-jewelry").slideDown();}
+      else if (category=='Musical Instrument') { $(".category-container").slideUp(); $("#category-musical").slideDown();}
+      else if (category=='Gun') { $(".category-container").slideUp(); $("#category-gun").slideDown();}
+      else { $(".category-container").slideUp(); }
+    });
+
+  </script>
+
+{% endblock content %}

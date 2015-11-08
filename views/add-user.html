@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="col-md-10">
+		<div class="well well-lg">
+			<h2>Add User</h2>
+			<form method="post" action="/users?view=add">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="name">Full Name</label>
+							<input type="text" name="name" value="" class="form-control" placeholder="Full Name"/>
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="text" name="email" value="" class="form-control" placeholder="Email"/>
+						</div>
+						<div class="form-group">
+							<label for="phone">Phone</label>
+							<input type="text" name="phone" value="" class="form-control" placeholder="Phone"/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" name="username" value="" class="form-control" placeholder="Username"/>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" name="password" value="" class="form-control" placeholder="Password"/>
+						</div>
+						<div class="form-group">
+							<label for="confrm_password">Confirm Password</label>
+							<input type="password" name="confrm_password" value="" class="form-control" placeholder="Confirm Password"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="btn-toolbar">
+							<input type="submit" class="btn btn-primary" value="Save User" />
+							<a href="/users" class="btn btn-default">Users List</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock content %}

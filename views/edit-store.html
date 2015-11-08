@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10">
+    <div class="well well-lg">
+      <h2>Edit Stores</h2>
+      <form method="post" action="/stores?view=edit&store={{store.key.urlsafe()}}">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="storeName">Store Name / Branch Name / Number</label>
+              <input type="text" name="storeName" value="{{store.storeName}}" class="form-control" placeholder="Store Name"/>
+            </div>
+            <!-- Address -->
+            <div class="form-group">
+              <label for="address1">Address 1</label>
+              <input type="text" name="address1" class="form-control" value="{{store.address.address1}}" placeholder="Address 1" />
+            </div>
+            <div class="form-group">
+              <label for="address2">Address 2</label>
+              <input type="text" name="address2" class="form-control" value="{{store.address.address2}}" placeholder="Address 2" />
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" name="city" class="form-control" value="{{store.address.city}}" placeholder="City" />
+            </div>
+            <div class="row">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label>State</label>
+                  <input type="text" name="state" class="form-control" value="{{store.address.state}}" placeholder="State" />
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label>Zip Code</label>
+                  <input type="text" name="zipCode" class="form-control" value="{{store.address.zipCode}}" placeholder="Zip Code" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="text" name="phone" value="{{store.phoneNumber}}" class="form-control" placeholder="Phone Number"/>
+            </div>
+            <div class="form-group">
+              <label for="phone">Fax Number</label>
+              <input type="text" name="phone" value="{{store.faxNumber}}" class="form-control" placeholder="Fax Number"/>
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Save" />
+        <a href="/stores?view=info&store={{store.key.urlsafe()}}" class="btn btn-default">Cancel</a>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+

@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Transactions Content -->
+  <div class="col-md-10">
+
+    <h2>Transactions</h2>
+    <div class="btn-toolbar">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Create Transaction <span class="caret"></span></button>
+        <a href="" class="btn btn-success"></a>
+        <ul class="dropdown-menu">
+          <li><a href="/transactions/loans?view=create">Loans</a></li>
+          <li><a href="/transactions/stocks?view=create">Stock Items</a></li>
+          <li><a href="/transactions/redeems?view=create">Redeem</a></li>
+          <li><a href="/transactions/invoices?view=create">Invoices</a></li>
+          <li><a href="/transactions/receipts?view=create">Receipts</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <ul id="transactions-list" class="nav nav-tabs">
+      <li class="{{ ' active' if url.path == '/transactions' else '' }}"><a href="#transactions">Transactions</a></li>
+      <li class="{{ ' active' if url.path == '/transactions/loans' else '' }}"><a href="#loans">Loans</a></li>
+      <li class="{{ ' active' if url.path == '/transactions/redeems' else '' }}"><a href="#redeems">Redeems</a></li>
+      <li class="{{ ' active' if url.path == '/transactions/stocks' else '' }}"><a href="#stocks">Stocks</a></li>
+      <li class="{{ ' active' if url.path == '/transactions/invoices' else '' }}"><a href="#invoices">Invoices</a></li>
+      <li class="{{ ' active' if url.path == '/transactions/receipts' else '' }}"><a href="#receipts">Receipts</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="transactions" class="tab-pane{{ ' active' if url.path == '/transactions' else '' }}">
+            <h3>All Transactions</h3>
+            <table id="transactions-table" class="table table-hover table-bordered table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Type</th>
+                  <th>Owner</th>
+                  <th>Birthdate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transaction in transactions %}
+                <tr class="listLink" data-key="{{transaction.key.urlsafe()}}">
+                  <td><input type="checkbox" class="checkthis" /></td>
+                  <td>{{ transaction.transactionNumber }}</td>
+                  <td>{{ transaction.description }}</td>
+                  <td>{{ transaction.dateCreated|dateformat }}</td>
+                  <td>{{ transaction.transactionType }}</td>
+                  <td>{{ transaction.customer.firstname }}</td>
+                  <td>{{ transaction.customer.birthdate}}</td>
+                  <td>{{ transaction.status }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        <div id="loans" class="tab-pane{{ ' active' if url.path == '/transactions/loans' else '' }}">
+            <h3>Loans</h3>
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <a href="#redeem-multiple-modal" class="btn btn-default btn-sm">Redeem Loans</a>
+              </div>
+            </div>
+            <table id="loans-table" class="table table-hover table-bordered table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Owner</th>
+                  <th>Birthdate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transaction in transactions %}
+                  {% if transaction.transactionType=='Loan' %}
+                  <tr>
+                    <td><input type="checkbox" class="checkthis" /></td>
+                    <td>{{ transaction.transactionNumber }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.dateCreated|dateformat }}</td>
+                    <td>{{ transaction.customer.firstname }}</td>
+                    <td>{{ transaction.customer.birthdate }}</td>
+                    <td>{{ transaction.status }}</td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        <div id="redeems" class="tab-pane{{ ' active' if url.path == '/transactions/redeems' else '' }}">
+            <h3>Redeems</h3>
+            <table id="redeems-table" class="table table-hover table-bordered table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Owner</th>
+                  <th>Birthdate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transaction in transactions %}
+                  {% if transaction.transactionType=='Redeems' %}
+                  <tr>
+                    <td><input type="checkbox" class="checkthis" /></td>
+                    <td>{{ transaction.transactionNumber }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.dateCreated|dateformat }}</td>
+                    <td>{{ transaction.customer.firstname }}</td>
+                    <td>{{ transaction.customer.birthdate }}</td>
+                    <td>{{ transaction.status }}</td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>            
+        </div>
+        <div id="stocks" class="tab-pane{{ ' active' if url.path == '/transactions/stocks' else '' }}">
+            <h3>Stocks</h3>
+            <table id="stocks-table" class="table table-hover table-bordered table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Owner</th>
+                  <th>Birthdate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transaction in transactions %}
+                  {% if transaction.transactionType=='Stock' %}
+                  <tr>
+                    <td><input type="checkbox" class="checkthis" /></td>
+                    <td>{{ transaction.transactionNumber }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.dateCreated|dateformat }}</td>
+                    <td>{{ transaction.customer.firstname }}</td>
+                    <td>{{ transaction.customer.birthdate }}</td>
+                    <td>{{ transaction.status }}</td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>            
+        </div>
+        <div id="invoices" class="tab-pane{{ ' active' if url.path == '/transactions/invoices' else '' }}">
+            <h3>Invoices</h3>
+            <table id="invoices-table" class="table table-hover table-bordered table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Owner</th>
+                  <th>Birthdate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transaction in transactions %}
+                  {% if transaction.transactionType=='Invoices' %}
+                  <tr>
+                    <td><input type="checkbox" class="checkthis" /></td>
+                    <td>{{ transaction.transactionNumber }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.dateCreated|dateformat }}</td>
+                    <td>{{ transaction.customer.firstname }}</td>
+                    <td>{{ transaction.customer.birthdate }}</td>
+                    <td>{{ transaction.status }}</td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        <div id="receipts" class="tab-pane{{ ' active' if url.path == '/transactions/receipts' else '' }}">
+            <h3>Receipts</h3>
+            <table id="receipts-table" class="table table-hover table-bordered table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>No</th>
+                  <th>Description</th>
+                  <th>Date Created</th>
+                  <th>Owner</th>
+                  <th>Birthdate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for transaction in transactions %}
+                  {% if transaction.transactionType=='Receipts' %}
+                  <tr>
+                    <td><input type="checkbox" class="checkthis" /></td>
+                    <td>{{ transaction.transactionNumber }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.dateCreated|dateformat }}</td>
+                    <td>{{ transaction.customer.firstname }}</td>
+                    <td>{{ transaction.customer.birthdate }}</td>
+                    <td>{{ transaction.status }}</td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>            
+        </div>
+    </div>
+
+  </div>
+  <!-- Transactions Content -->
+{% endblock content %}
+
+
+

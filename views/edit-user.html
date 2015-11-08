@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="col-md-10">
+		<div class="well well-lg">
+			<h2>Edit User</h2>
+			<form method="post" action="/users?view=edit&dbuser={{dbuser.key.urlsafe()}}">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="name">Full Name</label>
+							<input type="text" name="name" value="{{dbuser.name}}" class="form-control" placeholder="Full Name"/>
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="text" name="email" value="{{dbuser.email[0]}}" class="form-control" placeholder="Email"/>
+						</div>
+						<div class="form-group">
+							<label for="phone">Phone</label>
+							<input type="text" name="phone" value="{{dbuser.phone[0]}}" class="form-control" placeholder="Phone"/>
+						</div>
+						<div class="form-group">
+							<label for="username">Status</label>
+							<input type="radio" name="status" class="input" value="active" checked="checked" {{'selected' if dbuser.status=='checked="checked"' else ''}} /> Active
+							<input type="radio" name="status" class="input" value="inactive" /> InActive
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" name="username" value="{{dbuser.username}}" class="form-control" placeholder="Username"/>
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" name="password" value="" class="form-control" placeholder="Password"/>
+						</div>
+						<div class="form-group">
+							<label for="confrm_password">Confirm Password</label>
+							<input type="password" name="confrm_password" value="" class="form-control" placeholder="Confirm Password"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="btn-toolbar">
+							<input type="submit" class="btn btn-primary" value="Save" />
+							<a href="/users?view=info?dbuser={{dbuser.key.urlsafe()}}" class="btn btn-default">Cancel</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock content %}

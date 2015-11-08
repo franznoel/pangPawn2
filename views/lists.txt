@@ -1,0 +1,41 @@
+
+Pages:
+
+ # Lists:
+ -* Customer List - done
+ -* Loans List - done
+ -* Gun Lists - done
+ -* Items Lists (Inventory System) - done
+ -* Category Lists - done
+ 
+ # Input Screen
+ -* Create User
+ -* Edit User
+ -* Create Customer
+ -* Edit Customer
+ -* Pawn/Loan
+ -* Pay
+ -* Redeem
+ -* Sell
+ -* Stock Merchandise (Expiration)
+ -* Create Category 
+ -* Edit Category
+
+ # Reports
+ -* Accounting
+ -* Notices
+
+# Settings
+ -* Change Next Numbers
+ -* Setup Fee Table
+ -* Tax Fee Table
+
+# Repair
+ -* Change Federal Firearms License
+
+# Accounting
+ -* Active loans measuring every day, week, month, year
+
+
+
+

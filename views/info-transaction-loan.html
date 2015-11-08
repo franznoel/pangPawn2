@@ -1,0 +1,427 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10 col-sm-10">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2>Info Loan</h2>
+        <form method="post" action="/transactions/loans?view=create">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Loan Number</label>
+                <p class="form-control-static">{{transaction.transactionNumber}}</p>
+              </div>
+              <div class="form-group">
+                <label>Loan Date</label>
+                <p class="form-control-static">{{transaction.dateCreated|dateformat('%Y-%m-%d %H:%M %p')}}</p>
+              </div>
+              <div class="form-group">
+                <label for="customer">Customer Info</label>
+                <p class="">
+                  {% set customer = transaction.customer.get() %}
+                  {{customer.lastname}}, {{customer.firstname}}<br/>
+                  {{customer.address.address1}}, <br/>
+                  {{customer.address.address2}}<br/>
+                  {{customer.address.city}}, {{customer.address.state}} {{customer.address.zipCode}}
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Other Information</h4>
+                </div>
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                      <th>Extended</th>
+                      <td><p class="other-info-value">Yes</p></td>
+                    </tr>
+                    <tr>
+                      <th>Status</th>
+                      <td><p class="other-info-value">Active</p></td>
+                    </tr>
+                </table>
+              </div><!-- .panel -->
+            </div>
+
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Loan Information</h4>
+                </div>
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                      <th>Original</th>
+                      <td>08/02/2014</td>
+                      <td>L123456</td>
+                    </tr>
+                    <tr>
+                      <th>Previous</th>
+                      <td>08/02/2014</td>
+                      <td>L123456</td>
+                    </tr>
+                    <tr>
+                      <th>Next</th>
+                      <td>01/02/2015</td>
+                      <td>L123458</td>
+                    </tr>
+                </table>
+              </div><!-- .panel -->
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><h4 class="panel-title">Location</h4></div>
+                <table class="table table-bordered table-condensed">
+                  <tr>
+                    <th>In Premises</th>
+                    <td>
+                      <select name="inPremises" class="form-control input-sm input-vanishing-border">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Item Location</th>
+                    <td><input type="text" name="location" class="form-control input-sm input-vanishing-border" value="TV Area (C2)" /></td>
+                  </tr>
+                </table>
+              </div><!-- .panel -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-7">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <p class="form-control-static">{{transaction.category}}</p>
+              </div>
+              <!-- Categories -->
+              <div id="category-electronics" class="category-container">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="brandName">Brand</label>
+                      <p class="form-control-static">{{transaction.electronics.brandName}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="modelNumber">Model Number</label>
+                      <p class="form-control-static">{{transaction.electronics.modelNumber}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="serialNumber">Serial Number</label>
+                      <p class="form-control-static">{{transaction.electronics.serialNumber}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="category-jewelry" class="category-container">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="karat">Karat</label>
+                      <p class="form-control-static">{{transaction.jewelry.karat}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="deadWeight">Dead Weight</label>
+                      <p class="form-control-static">{{transaction.jewelry.deadWeight}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="grams">Grams</label>
+                      <p class="form-control-static">{{transaction.jewelry.grams}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="ounces">Ounces</label>
+                      <p class="form-control-static">{{transaction.jewelry.ounces}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="counts">Counts</label>
+                      <p class="form-control-static">{{transaction.jewelry.counts}}</p>
+                    </div>
+                  </div>                                
+                </div>
+              </div>
+              <div id="category-musical" class="category-container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="instrumentBrand">Brand</label>
+                      <p class="form-control-static">{{transaction.musical.instrumentBrand}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="instrumentKind">Instrument Kind</label>
+                      <p class="form-control-static">{{transaction.electronics.instrumentKind}}</p>
+                    </div>
+                  </div>                                
+                </div>
+              </div>      
+              <div id="category-gun" class="category-container">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="gunCaliber">Gun Caliber</label>
+                      <p class="form-control-static">{{transaction.gun.gunCaliber}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="gunType">Gun Type</label>
+                      <p class="form-control-static">{{transaction.gun.gunType}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="gunAction">Gun Action</label>
+                      <p class="form-control-static">{{transaction.gun.gunAction}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>      
+              <!-- End Categories -->
+              <div class="form-group">
+                <label>Item Description</label>
+                <p class="form-control-static">{{transaction.description}}</p>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-horizontal">
+                <div class="form-group">
+                  <label for="principalAmount" class="col-md-5 control-label">Principal Fee</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="principalAmount" type="text" name="principalAmount" class="form-control" value="{{transaction.principalAmount|floatToDecimal}}" placeholder="0.00" disabled="disabled" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="setupFee" class="col-md-5 control-label">Setup Fee</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="setupFee" type="text" name="setupFee" class="form-control" value="{{transaction.setupFee|floatToDecimal}}" placeholder="0.00" disabled="disabled" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="insuranceFee" class="col-md-5 control-label">Fire/Misc Fee</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="insuranceFee" type="text" name="insuranceFee" class="form-control" value="{{transaction.insuranceFee|floatToDecimal}}" placeholder="0.00" disabled="disabled" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="total" class="col-md-5 control-label">Total</label>
+                  <div class="col-md-7">
+                    <div class="input-group">
+                      <label class="input-group-addon">$</label>
+                      <input id="total" type="text" name="total" class="form-control" value="" placeholder="0.00" disabled="disabled" />
+                    </div>
+                  </div>
+                </div>
+              </div><!-- .form-horizontal -->
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="/transactions" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Back To Transactions List</a>
+            </div>
+            <div class="btn-group">
+              <a href="#redeem-modal" class="btn btn-primary" data-toggle="modal" data-target="#redeem-modal">Redeem</a>
+              <a href="#void-modal" class="btn btn-danger" data-toggle="modal" data-target="#void-modal">Void</a>
+              <a href="#extend-modal" class="btn btn-success">Extend</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="select-customer" class="modal fade" role="customer-selector">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4>Select Customer</h4>
+          </div>
+          <div class="modal-body">
+            <table id="searchCustomers-table" class="table table-bordered table-condensed">
+              <thead>
+                <tr>
+                  <td>Customer Name</td>
+                  <td>License</td>
+                  <td>Birthdate</td>
+                  <td>Address</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for customer in customers %}
+                <tr data-key="{{customer.key.urlsafe()}}">
+                  <td>{{customer.lastname}}, {{customer.firstname}}</td>
+                  <td>{{customer.license}}</td>
+                  <td>{{customer.birthdate}}</td>
+                  <td>{{customer.address.address1}}, {{customer.address.address2}}, {{customer.address.city}}, {{customer.address.state}}, {{customer.address.zipCode}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #redeem.modal-->
+  <div id="redeem-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <form method="post" action="">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Redeem</h3>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="loanNumber">Loan Number</label>
+                  <input type="text" name="loanNumber" class="form-control" value="{{transaction.transactionNumber}}" />
+                </div>
+                <div class="form-group">
+                  <label for="dateCreated">Date Created</label>
+                  <input type="date" name="dateCreated" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                  <label for="dateCreated">Redeem Date</label>
+                  <input type="date" name="redeemDate" class="form-control" value="" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label for="principalAmount" class="col-md-5 control-label">Principal Fee</label>
+                    <div class="col-md-7">
+                      <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input id="principalAmount" type="text" name="principalAmount" class="form-control" value="{{transaction.principalAmount|floatToDecimal}}" placeholder="0.00" disabled="disabled" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="setupFee" class="col-md-5 control-label">Setup Fee</label>
+                    <div class="col-md-7">
+                      <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input id="setupFee" type="text" name="setupFee" class="form-control" value="{{transaction.setupFee|floatToDecimal}}" placeholder="0.00" disabled="disabled" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="insuranceFee" class="col-md-5 control-label">Fire/Misc Fee</label>
+                    <div class="col-md-7">
+                      <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input id="insuranceFee" type="text" name="insuranceFee" class="form-control" value="{{transaction.insuranceFee|floatToDecimal}}" placeholder="0.00" disabled="disabled" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="total" class="col-md-5 control-label">Total</label>
+                    <div class="col-md-7">
+                      <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input id="total" type="text" name="total" class="form-control" value="" placeholder="0.00" disabled="disabled" />
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="form-group">
+                    <label for="total" class="col-md-5 control-label">Payment</label>
+                    <div class="col-md-7">
+                      <div class="input-group">
+                        <label class="input-group-addon">$</label>
+                        <input id="total" type="text" name="total" class="form-control" value="" placeholder="0.00" disabled="disabled" />
+                      </div>
+                    </div>
+                  </div>                  
+                </div><!-- .form-horizontal -->              
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="Submit" class="btn btn-primary" value="Save" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- #void.modal-->
+  <div id="void-modal" class="modal fade">
+    <div class="modal-dialog">
+      <form method="post" action="">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Void Loan</h3>
+          </div>
+          <div class="modal-body">
+            <p>If you really want to <span style="font-weight:bold;">void this loan</span>? Enter the Loan Number of this loan.</p>
+            <div class="row-fluid">
+              <div class="span12">
+                <input type="text" name="void-loanNumber" class="form-control" value="" placeholder="Enter Loan Number to Void" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="Submit" class="btn btn-danger" value="Void" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+    var principalAmount = parseFloat($("#principalAmount").val());
+    var setupFee = parseFloat($("#setupFee").val());
+    var insuranceFee = parseFloat($("#insuranceFee").val());
+    var totalAmount = parseFloat(principalAmount + setupFee + insuranceFee);
+
+    $(document).ready(function() {
+      $(".category-container").hide(); $("#category-electronics").show();
+      $("#total").val(totalAmount.toFixed(2));
+    });
+
+    $("#category").change(function() {
+      var category  = $(this).val();
+      console.log(category);
+      if (category=='Electronics') { $(".category-container").slideUp(); $("#category-electronics").slideDown();} 
+      else if (category=='Jewelry') { $(".category-container").slideUp();$("#category-jewelry").slideDown();}
+      else if (category=='Musical Instrument') { $(".category-container").slideUp(); $("#category-musical").slideDown();}
+      else if (category=='Gun') { $(".category-container").slideUp(); $("#category-gun").slideDown();}
+      else { $(".category-container").slideUp(); }
+    });
+
+  </script>
+
+{% endblock content %}

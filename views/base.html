@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <meta charset="utf-8"/>
+    <title>Pawnsoftware</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/handsontable/handsontable.full.min.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-datatables/datatables.css" ></style>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" ></style>
+    <script type="text/javascript" src="/js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="/handsontable/handsontable.full.min.js"></script>
+    <style type="text/css">
+      .btn-toolbar {padding:10px 0 10px 0;}
+    </style>
+    {% endblock head %}
+
+  </head>
+
+  <body>
+
+    <nav id="menu" class="navbar navbar-default navbar-static-top">
+      {% block menu %}
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">PangPawn</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{logout_url}}">{{user}}</a></li>
+          </ul>
+        </div><!-- /.container-fluid -->
+      {% endblock menu %}
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        {% block navigation %}
+          <div class="col-md-2 col-sm-2">
+            <!-- Navigation -->
+            <div class="list-group">
+              <a href="{{host_url}}/" class="list-group-item{{ ' active' if url.path == '/' else '' }}">Dashboard</a>
+              <a href="{{host_url}}/stores" class="list-group-item{{ ' active' if url.path == '/stores' else '' }}">Stores</a>
+              <a href="{{host_url}}/users" class="list-group-item{{ ' active' if url.path == '/users' else '' }}">Users</a>
+              <a href="{{host_url}}/customers" class="list-group-item{{ ' active' if url.path == '/customers' else '' }}">Customers</a>
+              <a href="{{host_url}}/transactions" class="list-group-item{{ ' active' if url.path == '/transactions' or url.path == '/transactions/invoices' or url.path == '/transactions/loans' or url.path == '/transactions/redeems' or url.path == '/transactions/stocks' or url.path == '/transactions/receipts' else '' }}">Transactions</a>
+              <a href="{{host_url}}/items" class="list-group-item{{ ' active' if url.path == '/items' else '' }}">Items</a>
+              <a href="{{host_url}}/reports" class="list-group-item{{ ' active' if url.path == '/reports' else '' }}">Reports</a>
+              <a href="{{host_url}}/settings" class="list-group-item{{ ' active' if url.path == '/settings' else '' }}">Settings</a>
+            </div>
+            <!-- Navigation -->
+          </div>
+        {% endblock navigation %}
+
+
+        {% block content %}{% endblock content %}
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-datatables/datatables.min.js" ></script>
+    <script type="text/javascript" src="/bootstrap-datatables/datatables-bootstrap.js" ></script>
+    <script type="text/javascript">
+      function redirect_store(storeKey) { window.location = "/stores?view=info&store=" + storeKey; }
+      function redirect_dbuser(dbUserKey) { window.location = "/users?view=info&dbuser=" + dbUserKey; }
+      function redirect_customer(customerKey) { window.location = "/customers?view=info&customer=" + customerKey; }
+      function redirect_transaction(transactionKey) { window.location = "/transactions/loans?view=info&transaction=" + transactionKey; }
+
+      $(document).ready(function() {
+        $('#users-table').dataTable({"language": {"emptyTable": "There are no users."}});
+        $('#stores-table').dataTable({"language": {"emptyTable": "There are no stores listed."}});
+        $('#customers-table').dataTable({"language": {"emptyTable": "There are no customers listed."}});
+        $('#transactions-table').dataTable({"language": {"emptyTable": "There are no transactions."}});
+        $('#items-table').dataTable({"language": {"emptyTable": "There are no items."}});
+        $('#categories-table').dataTable({"language": {"emptyTable": "There are no categories."}});
+        $('#stocks-table').dataTable({"language": {"emptyTable": "There are no stocks."}});
+        $('#invoices-table').dataTable({"language": {"emptyTable": "There are no invoices."}});
+        $('#receipts-table').dataTable({"language": {"emptyTable": "There are no receipts."}});
+ 
+        // Transactions
+        $('#loans-table').dataTable({"language": {"emptyTable": "There are no loans."}});
+        $('#redeems-table').dataTable({"language": {"emptyTable": "There are no redeems."}});
+        $('#sold-table').dataTable({"language": {"emptyTable": "There are no sold items."}});
+        $('#bought-table').dataTable({"language": {"emptyTable": "There are no sales."}});
+        $('#accounts').dataTable({"language": {"emptyTable": "There are no accounts."}});
+
+        // Entity Tables
+        $("#stores-table > tbody > tr").click(function() { redirect_store($(this).data('key')); });
+        $("#users-table > tbody > tr").click(function() { redirect_dbuser($(this).data('key')); });
+        $("#customers-table > tbody > tr").click(function() { redirect_customer($(this).data('key')); });
+        $('#transactions-table > tbody > tr').click(function() { redirect_transaction($(this).data('key')) });
+
+        // Search Table
+        $('#searchCustomers-table').dataTable({"language": {"emptyTable": "There are no customers listed."}});
+        $("#searchCustomers-table > tbody > tr").click(function() { set_customer($(this).data('key')); });
+      });
+
+      $('#store-list a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#transactions-list a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#transactions a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#reports a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      $('#settings a').click(function (e) { e.preventDefault(); $(this).tab('show'); });
+      
+        function set_customer(customerKey) { 
+            $("#customerKey").val(customerKey);
+            $.ajax({
+                url: "http://localhost:14080/customers?view=resource&customer="+customerKey,
+                type: "GET",
+                dataType: "text/json",
+                complete: function(xhr,result) {
+                    var customer = JSON.parse(xhr.responseText);
+                    var cinfo = "";
+                    cinfo+="" + customer.lastname + ", " + customer.firstname + "\n";
+                    cinfo+="" + customer.address.address1 + ",\n";
+                    cinfo+="" + customer.address.city + ", " + customer.address.state + " " + customer.address.zipCode + "\n";
+                    $("#info-customer").html(cinfo);
+                }
+            });
+            $("#info-customer").html();
+            $(".modal").hide();
+        }
+
+      function getAllPanel() {
+        return $(".col-md-10");
+      } 
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="col-md-10">
+		<h2>Dashboard</h2>
+    <div class="row">
+      <div class="col-md-8">
+        <!-- Transactions -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Transactions</h4>
+          </div>
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>Transactions</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Loans</th><td>{{loans_count}}</td><td>{{loans_total|floatToDollar}}</td>
+              </tr>
+              <tr>
+                <th>Purchases</th><td>{{purchase_count}}</td><td>{{purchases_total|floatToDollar}}</td>
+              </tr>
+              <tr>
+                <th>Invoices</th><td>{{invoice_count}}</td><td>{{invoices_total|floatToDollar}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Income</h4>
+          </div>
+          <table class="table table-condensed">
+            <tbody>
+              <tr>
+                <th>Today's Income</th><td>$0.00</td>
+              </tr>
+              <tr>
+                <th>Week's Income</th><td>$0.00</td>
+              </tr>
+              <tr>
+                <th>Month's Income</th><td>$0.00</td>
+              </tr>
+              <tr>
+                <th>Year's Income</th><td>$0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Transactions -->
+      </div>
+
+      <div class="col-md-4">
+        <!-- Stores -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Stores</h4>
+          </div>
+            <table class="table table-condensed">
+              <tbody>
+                <tr>
+                  <th>Number of Stores</th><td>{{stores_count}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <!-- Users -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Users</h4>
+          </div>
+            <table class="table table-condensed">
+              <tbody>
+                <tr>
+                  <th>Number of Users</th><td>{{dbusers_count}}</td>
+                </tr>
+                <tr>
+                  <th>Active Users</th><td>{{active_dbusers_count}}</td>
+                </tr>
+                <tr>
+                  <th>Inactive Users</th><td>{{active_dbusers_count}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <!-- Users -->
+
+        <!-- Customers -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Customers</h4>
+          </div>
+          <table class="table table-condensed">
+            <tr>
+              <th>Number of Customers</th><td>{{customers_count}}</td>
+            </tr>
+            <tr>
+              <th>Active Customers</th><td>{{active_customers_count}}</td>
+            </tr>
+            <tr>
+              <th>Inactive Customers</th><td>{{inactive_customers_count}}</td>
+            </tr>
+          </table>
+        </div>
+        <!-- Customers -->
+        
+        <!-- Items -->
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Categories</h4>
+          </div>
+          <table class="table table-condensed">
+            <tr>
+             <th>Jewelry</th><td>0</td>
+            </tr>
+            <tr>
+             <th>Musical Instruments</th><td>0</td>
+            </tr>
+            <tr>
+             <th>Electronics</th><td>0</td>
+            </tr>
+            <tr>
+             <th>Guns</th><td>0</td>
+            </tr>
+          </table>
+        </div>
+        <!-- Items -->
+
+      </div>
+    </div>
+	</div>
+{% endblock content %}
+
+
+
+

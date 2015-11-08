@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="col-md-10">
+    <div class="well well-md">
+      <h2>Company Info</h2>
+        {% if message_status %}
+          <div class="alert alert-{{ message_status }}">
+            <p>{{ message }}</p>
+          </div>
+        {% endif %}
+      
+        {% if company %}
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="companyId">Company ID</label>
+              <p>{{ company.key.id() }}</p>
+            </div>
+            <div class="form-group">
+              <label for="companyName">Company Name</label>
+              <p>{{company.companyName}}</p>
+            </div>
+            <label for="status">Company Address</label>
+            <address>
+            {{company.address.address1}},<br/>
+            {{company.address.address2}}<br/>
+            {{company.address.city}}, {{company.address.state}} {{company.address.zipCode}}<br/>
+            </address>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="status">Namespace</label>
+              <p class="form-control-static">{{company.namespace}}</p>
+            </div>
+            <div class="form-group">
+              <label for="status">Status</label>
+              <p class="form-control-static">{{company.status}}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Button -->
+        <div class="btn-toolbar">
+            <div class="btn-group">
+              <a href="/companies?view=edit&company={{company.key.urlsafe()}}" class="btn btn-primary">Edit</a>
+              <a href="#delete-company" class="btn btn-danger" data-toggle="modal" data-target="#delete-company">Delete</a>
+            </div>
+            <a href="/companies" class="btn btn-default">Company List</a>
+        </div>
+        {% else %}
+        <div class="row">
+          <div class="col-md-8">
+            <p>The company that you're referring to does not exist. Go back to the <a href="/companies">Company list</a>.</p>
+          </div>
+        </div>
+        <div class="btn-toolbar">
+            <a href="/companies" class="btn btn-default">Company List</a>
+        </div>
+        {% endif %}
+    </div><!-- .well .well-sm-->
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul id="company-list" class="nav nav-tabs">
+          <li class="active"><a href="#stores">Stores</a></li>
+          <li><a href="#users">Users</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <!-- Stores -->
+          <div id="stores" class="tab-pane active">
+            <!-- buttons -->
+            <div class="btn-toolbar pull-right">
+              <div class="btn-group">
+                <a href="/stores" class="btn btn-primary btn-sm">All Stores List</a>
+              </div>
+            </div>
+            <h3>Stores</h3>
+            <!-- Table -->
+            <table id="stores-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>StoreName</th>
+                  <th>Address</th>
+                  <th>Opening Date</th>
+                  <th>No. Of Users</th>
+               </tr>
+              </thead>
+              <tbody>
+                {% for store in stores %}
+                  <tr class="listLink" data-key="{{store.key.urlsafe()}}">
+                    <td><input type="checkbox" name="id" value="{{store.key.id()}}" /></td>
+                    <td>{{store.storeName}}</td>
+                    <td>{{ store.address.address1}} {{store.address.address2}}, {{store.address.city}}, {{store.address.state}} {{store.address.zipCode}}</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Users -->  
+          <div id="users" class="tab-pane">
+            <!-- buttons -->
+            <div class="btn-toolbar pull-right">
+              <div class="btn-group">
+                <a href="/users" class="btn btn-primary btn-sm">All Users List</a>
+              </div>
+            </div>
+            <h3>Users</h3>
+            <table id="users-table" class="table table-hover table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkall" /></th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Date Started</th>
+                  <th>Last Activity</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                  <tr class="listLink" data-key="{{store.key.urlsafe()}}">
+                    <td><input type="checkbox" name="id" value="{{store.key.id()}}" /></td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.status}}</td>
+                    <td>{{user.dateStarted|datetimeformat}}</td>
+                    <td>{{user.dateUpdated|datetimeformat}}</td>
+                    <td></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-company" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete Company</h4>
+        </div>
+        <div class="modal-body">
+          <h3></h3>
+          <p>Are you sure you want to delete this company?</p>
+        </div>
+        <div class="modal-footer">
+          <div type="button" class="btn btn-default" data-dismiss="modal">Close</div>
+          <a href="/companies/delete/{{company.key.urlsafe()}}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+
+

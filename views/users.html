@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="col-md-10">
+    <h2>Users</h2>
+    <div class="btn-toolbar">
+      <a href="/users?view=add" class="btn btn-primary">Add Users</a>
+      <a href="#users-csv-upload" class="btn btn-success" data-toggle="modal" data-target="#users-csv-upload">Upload Users</a>
+    </div>
+    <table id="users-table" class="table table-hover table-bordered table-striped table-condensed">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="checkall" /></th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Stores</th>
+          <th>Date Started</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dbuser in dbusers %}
+        <tr class="listLink" data-key="{{dbuser.key.urlsafe()}}">
+          <td><input type="checkbox" class="checkthis" /></td>
+          <td>{{dbuser.name}}</td>
+          <td>{{dbuser.email[0]}}</td>
+          <td>{{dbuser.phone[0]}}</td>
+          <td>
+            {% for store in dbuser.stores %}
+              {{store}}
+            {% endfor %}
+          </td>
+          <td>{{dbuser.dateCreated}}</td>
+          <td>Active</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="users-csv-upload" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form method="post" action="" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h4 class="modal-title">Upload Stores from CSV</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="csvStores">Stores CSV</label>
+              <input type="file" class="form-control" name="csvStores" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#close" class="btn btn-default" data-dismiss="modal">Close</a>
+            <a href="" class="btn btn-primary">Upload</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>  
+{% endblock content %}
